@@ -58,7 +58,8 @@ namespace Covenant
             app.OnExecute(() =>
             {
                 if (!File.Exists(Path.Combine(Common.CovenantSharpSploitDirectory, "SharpSploit.sln")) ||
-                    !File.Exists(Path.Combine(Common.CovenantRubeusDirectory, "Rubeus.sln")))
+                    !File.Exists(Path.Combine(Common.CovenantRubeusDirectory, "Rubeus.sln"))
+                    !File.Exists(Path.Combine(Common.CovenantInternalMonologueDirectory, "InternalMonologue.sln")))
                 {
                     Console.Error.WriteLine("Error: git submodules have not been initialized");
                     Console.Error.WriteLine("Covenant's submodules can be cloned with: git clone --recurse-submodules https://github.com/cobbr/Covenant");
