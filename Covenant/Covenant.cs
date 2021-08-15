@@ -58,7 +58,7 @@ namespace Covenant
             app.OnExecute(() =>
             {
                 if (!File.Exists(Path.Combine(Common.CovenantSharpSploitDirectory, "SharpSploit.sln")) ||
-                    !File.Exists(Path.Combine(Common.CovenantRubeusDirectory, "Rubeus.sln"))
+                    !File.Exists(Path.Combine(Common.CovenantRubeusDirectory, "Rubeus.sln")) ||
                     !File.Exists(Path.Combine(Common.CovenantInternalMonologueDirectory, "InternalMonologue.sln")))
                 {
                     Console.Error.WriteLine("Error: git submodules have not been initialized");
