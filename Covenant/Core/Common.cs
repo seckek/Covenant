@@ -43,6 +43,7 @@ namespace Covenant.Core
         public static readonly string CovenantReferenceSourceLibraries = CovenantDataDirectory + "ReferenceSourceLibraries" + Path.DirectorySeparatorChar;
         public static readonly string CovenantSharpSploitDirectory = CovenantReferenceSourceLibraries + "SharpSploit" + Path.DirectorySeparatorChar;
         public static readonly string CovenantRubeusDirectory = CovenantReferenceSourceLibraries + "Rubeus" + Path.DirectorySeparatorChar;
+        public static readonly string CovenantInternalMonologueDirectory = CovenantReferenceSourceLibraries + "InternalMonologue" + Path.DirectorySeparatorChar;
 
         public static readonly string CovenantTaskDirectory = CovenantDataDirectory + "Tasks" + Path.DirectorySeparatorChar;
         public static readonly string CovenantTaskCSharpDirectory = CovenantTaskDirectory + "CSharp" + Path.DirectorySeparatorChar;

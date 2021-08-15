@@ -335,6 +335,30 @@ namespace Covenant.Core
                             await service.GetReferenceAssemblyByName("System.ServiceProcess.dll", Common.DotNetVersion.Net40)
                         },
                         EmbeddedResources = new List<EmbeddedResource>()
+                    },
+                    new ReferenceSourceLibrary
+                    {
+                        Name = "InternalMonologue", Description = "InternalMonologue is a C# tool for retrieving NetNTLM Hashes without Touching LSASS.",
+                        Location = "InternalMonologue" + Path.DirectorySeparatorChar,
+                        CompatibleDotNetVersions = new List<Common.DotNetVersion> { Common.DotNetVersion.Net35, Common.DotNetVersion.Net40 },
+                        ReferenceAssemblies = new List<ReferenceAssembly>
+                        {
+                            await service.GetReferenceAssemblyByName("mscorlib.dll", Common.DotNetVersion.Net35),
+                            await service.GetReferenceAssemblyByName("mscorlib.dll", Common.DotNetVersion.Net40),
+                            await service.GetReferenceAssemblyByName("System.dll", Common.DotNetVersion.Net35),
+                            await service.GetReferenceAssemblyByName("System.dll", Common.DotNetVersion.Net40),
+                            await service.GetReferenceAssemblyByName("System.Core.dll", Common.DotNetVersion.Net35),
+                            await service.GetReferenceAssemblyByName("System.Core.dll", Common.DotNetVersion.Net40),
+                            await service.GetReferenceAssemblyByName("System.XML.dll", Common.DotNetVersion.Net35),
+                            await service.GetReferenceAssemblyByName("System.XML.dll", Common.DotNetVersion.Net40),
+                            await service.GetReferenceAssemblyByName("System.Security.dll", Common.DotNetVersion.Net35),
+                            await service.GetReferenceAssemblyByName("System.Security.dll", Common.DotNetVersion.Net40),
+                            await service.GetReferenceAssemblyByName("System.Data.DataSetExtensions.dll", Common.DotNetVersion.Net35),
+                            await service.GetReferenceAssemblyByName("System.Data.DataSetExtensions.dll", Common.DotNetVersion.Net40),
+                            await service.GetReferenceAssemblyByName("System.Data.dll", Common.DotNetVersion.Net35),
+                            await service.GetReferenceAssemblyByName("System.Data.dll", Common.DotNetVersion.Net40)
+                        },
+                        EmbeddedResources = new List<EmbeddedResource>()
                     }
                 };
                 await service.CreateReferenceSourceLibraries(ReferenceSourceLibraries);
